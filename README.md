@@ -42,7 +42,7 @@ and this will build the binary in ```$GOPATH/bin```.
   * ```"delete"``` -- delete ```Via``` header.
 * ```"via_proxy_name": "name"``` -- this value will be used as the host name in the ```Via``` header, by default the server's
 host name will be used.
-* ```"allowed_networks": ["net1", ...]``` -- list of whitelisted networks in CIDR format.
+* ```"allowed_networks": ["net1", ...]``` -- list of whitelisted networks in CIDR format. ["*"]表示允许所有来源
 * ```"disallowed_networks": ["net1", ...]``` -- list of blacklisted networks in CIDR format.
 * ```"bind_ip": "ip"``` -- specify which IP will be used for outgoing connections.
 * ```"add_headers": {"header": "value", ...}``` -- adds specified headers to outgoing HTTP requests, this option will not
