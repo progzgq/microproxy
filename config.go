@@ -68,6 +68,9 @@ func validateConfigurationFileSchema(fileName string) {
 func validateNetworks(networks []string) {
 	if networks != nil && len(networks) > 0 {
 		for i, network := range networks {
+			if network == "*" {
+				break
+			}
 			_, _, err := net.ParseCIDR(network)
 			if err != nil {
 				if ip := net.ParseIP(network); ip != nil {

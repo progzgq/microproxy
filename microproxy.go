@@ -149,6 +149,11 @@ func setAllowedNetworksHandler(conf *configuration, proxy *goproxy.ProxyHttpServ
 func sourceIPMatches(networks []string) goproxy.ReqConditionFunc {
 	cidrs := make([](*net.IPNet), len(networks))
 	for idx, network := range networks {
+		if network == "*" {
+			return func(req *http.Request, ctx *goproxy.ProxyCtx) bool {
+				return true
+			}
+		}
 		_, cidrnet, _ := net.ParseCIDR(network)
 		cidrs[idx] = cidrnet
 	}
@@ -161,6 +166,9 @@ func sourceIPMatches(networks []string) goproxy.ReqConditionFunc {
 		}
 		addr := net.ParseIP(ip)
 		for _, network := range cidrs {
+			// if network.Compare("*") {
+			// 	return true
+			// }
 			if network.Contains(addr) {
 				return true
 			}
